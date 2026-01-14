@@ -14,6 +14,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Home() {
   const router = useRouter();
+  // const CURRENCY = "د.إ";
 
   return (
     <SafeAreaView className="flex-1 bg-white">

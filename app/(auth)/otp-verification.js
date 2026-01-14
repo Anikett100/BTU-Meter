@@ -45,7 +45,6 @@ export default function OTPVerification() {
     setLoading(true);
 
     try {
-      // Simulate API call delay
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
       console.log("OTP Verified:", enteredOtp);
