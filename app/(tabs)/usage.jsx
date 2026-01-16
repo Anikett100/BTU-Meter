@@ -9,13 +9,6 @@ export default function Usage() {
   return (
     <SafeAreaView className="flex-1 bg-gray-100">
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Header */}
-        {/* <View className="flex-row items-center px-6 py-4 bg-white">
-          <Ionicons name="chevron-back" size={24} color="#111827" />
-          <Text className="text-lg font-semibold ml-3">Consumption</Text>
-        </View> */}
-
-        {/* Monthly Usage Chart */}
         <View className="px-6 mt-6">
           <View className="bg-white rounded-2xl p-4 shadow-sm">
             <View className="flex-row items-center justify-between mb-3">
@@ -68,8 +61,6 @@ export default function Usage() {
             />
           </View>
         </View>
-
-        {/* Meter Reading History */}
         <View className="px-6 mt-8 mb-10">
           <View className="flex-row items-center mb-3">
             <Ionicons name="calendar-outline" size={18} color="#2196F3" />

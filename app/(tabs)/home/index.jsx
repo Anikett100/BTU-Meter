@@ -35,7 +35,6 @@ export default function Home() {
             </View>
 
             <TouchableOpacity
-              //   onPress={() => router.push("(tabs)/notifications")}
               onPress={() => router.push("/home/notifications")}
               className="relative"
             >
