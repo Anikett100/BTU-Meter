@@ -49,9 +49,17 @@ export default function Profile() {
 
         {/* Account */}
         <Section title="Account">
-          <MenuItem icon="person-outline" label="Personal Details" />
+          <MenuItem
+            icon="person-outline"
+            label="Personal Details"
+            onPress={() => router.push("/profile/personalDetails")}
+          />
           <Divider />
-          <MenuItem icon="settings-outline" label="Account Settings" />
+          <MenuItem
+            icon="settings-outline"
+            label="Account Settings"
+            onPress={() => router.push("/profile/accountSetting")}
+          />
         </Section>
 
         {/* Move In / Out */}
@@ -75,9 +83,17 @@ export default function Profile() {
 
         {/* Support & Help */}
         <Section title="Support & Help">
-          <MenuItem icon="help-circle-outline" label="FAQ" />
+          <MenuItem
+            icon="help-circle-outline"
+            label="FAQ"
+            onPress={() => router.push("/profile/faq")}
+          />
           <Divider />
-          <MenuItem icon="document-text-outline" label="Help & Support" />
+          <MenuItem
+            icon="document-text-outline"
+            label="Help & Support"
+            onPress={() => router.push("/profile/help&support")}
+          />
         </Section>
 
         {/* Sign Out */}

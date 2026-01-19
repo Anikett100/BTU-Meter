@@ -122,9 +122,9 @@ export default function Login() {
 
               <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
                 {showPassword ? (
-                  <EyeOff size={20} color="#0f172a" />
-                ) : (
                   <Eye size={20} color="#0f172a" />
+                ) : (
+                  <EyeOff size={20} color="#0f172a" />
                 )}
               </TouchableOpacity>
             </View>
