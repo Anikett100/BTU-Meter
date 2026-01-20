@@ -38,6 +38,8 @@ export default function Login() {
     }, 1500);
   };
 
+  
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
@@ -155,10 +157,12 @@ export default function Login() {
             </Text>
           </Pressable>
 
-          {/* Support */}
           <View className="flex-row justify-center mt-6">
             <Text className="text-gray-500">Need help? </Text>
-            <Text className="font-medium">Contact Support</Text>
+
+            <Pressable onPress={() => router.replace("/profile/help&support")}>
+              <Text className="font-medium text-teal-600">Contact Support</Text>
+            </Pressable>
           </View>
         </View>
       </ScrollView>

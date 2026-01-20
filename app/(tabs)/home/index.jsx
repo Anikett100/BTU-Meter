@@ -115,6 +115,7 @@ export default function Home() {
             <ActionCard
               icon={<DollarSign size={20} color="#2196F3" />}
               label="Pay Bill"
+              onPress={() => router.push("/billing/makePayment")}
             />
             <ActionCard
               icon={<BarChart3 size={20} color="#2196F3" />}
@@ -135,9 +136,12 @@ export default function Home() {
   );
 }
 
-function ActionCard({ icon, label }) {
+function ActionCard({ icon, label, onPress }) {
   return (
-    <TouchableOpacity className="w-[48%] bg-white rounded-2xl p-4 mb-4 shadow-sm">
+    <TouchableOpacity
+      className="w-[48%] bg-white rounded-2xl p-4 mb-4 shadow-sm"
+      onPress={onPress}
+    >
       <View className="bg-blue-100 w-10 h-10 rounded-full items-center justify-center mb-2">
         {icon}
       </View>

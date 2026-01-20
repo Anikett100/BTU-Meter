@@ -8,7 +8,6 @@ export default function AccountSettings() {
 
   return (
     <SafeAreaView className="flex-1 bg-white">
-      {/* Header */}
       <View className="flex-row items-center px-6 py-4 border-b border-gray-100">
         <Ionicons name="chevron-back" size={24} onPress={() => router.back()} />
         <Text className="text-lg font-semibold ml-3">Account Settings</Text>

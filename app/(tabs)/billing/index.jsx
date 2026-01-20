@@ -1,12 +1,49 @@
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import { useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 export default function BillingScreen() {
+  const [activeTab, setActiveTab] = useState("all");
+
+  const bills = [
+    {
+      id: 1,
+      month: "January",
+      year: "2024",
+      status: "Pending",
+      amount: "$127.50",
+      due: "Due: Jan 15, 2024",
+    },
+    {
+      id: 2,
+      month: "December",
+      year: "2023",
+      status: "Paid",
+      amount: "$142.30",
+      due: "Due: Dec 15, 2023",
+    },
+    {
+      id: 3,
+      month: "November",
+      year: "2023",
+      status: "Paid",
+      amount: "$98.75",
+      due: "Due: Nov 15, 2023",
+    },
+  ];
+
+  const filteredBills =
+    activeTab === "all"
+      ? bills
+      : activeTab === "paid"
+        ? bills.filter((b) => b.status === "Paid")
+        : bills.filter((b) => b.status === "Pending");
+
   return (
     <View className="flex-1 bg-gray-50 mt-16">
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Outstanding Balance Card */}
+        {/* Outstanding Card */}
         <View className="px-6 mt-4">
           <View className="bg-blue-500 rounded-3xl p-6">
             <Text className="text-white text-sm">Outstanding Balance</Text>
@@ -22,7 +59,7 @@ export default function BillingScreen() {
         </View>
 
         {/* Action Buttons */}
-        <View className="flex-row px-6 mt-6 space-x-4 gap-2">
+        <View className="flex-row px-6 mt-6 gap-3">
           <ActionButton
             icon="alert-circle-outline"
             label="Raise Dispute"
@@ -33,55 +70,55 @@ export default function BillingScreen() {
             icon="time-outline"
             label="Payment History"
             iconColor="#10b981"
+            onPress={() => router.push("/billing/paymentHistory")}
           />
         </View>
 
         {/* Tabs */}
-        <View className="flex-row justify-between bg-white mx-6 mt-6 rounded-full p-1">
-          <TabButton label="All Bills" active />
-          <TabButton label="Regular" />
-          <TabButton label="Deposit" />
+        <View className="flex-row bg-white mx-6 mt-6 rounded-full p-1 border border-gray-200">
+          <TabButton
+            label="All Bills"
+            active={activeTab === "all"}
+            onPress={() => setActiveTab("all")}
+          />
+          <TabButton
+            label="Paid Bills"
+            active={activeTab === "paid"}
+            onPress={() => setActiveTab("paid")}
+          />
+          <TabButton
+            label="Unpaid Bills"
+            active={activeTab === "unpaid"}
+            onPress={() => setActiveTab("unpaid")}
+          />
         </View>
 
         {/* Bills List */}
         <View className="px-6 mt-6 mb-20 space-y-4">
-          <BillItem
-            month="January"
-            year="2024"
-            status="Pending"
-            statusColor="orange"
-            amount="$127.50"
-            due="Due: Jan 15, 2024"
-          />
-
-          <BillItem
-            month="December"
-            year="2023"
-            status="Paid"
-            statusColor="green"
-            amount="$142.30"
-            due="Due: Dec 15, 2023"
-          />
-
-          <BillItem
-            month="November"
-            year="2023"
-            status="Paid"
-            statusColor="green"
-            amount="$98.75"
-            due="Due: Nov 15, 2023"
-          />
+          {filteredBills.map((bill) => (
+            <BillItem
+              key={bill.id}
+              month={bill.month}
+              year={bill.year}
+              status={bill.status}
+              amount={bill.amount}
+              due={bill.due}
+            />
+          ))}
         </View>
       </ScrollView>
     </View>
   );
 }
 
+/* ---------- Components ---------- */
+
 function ActionButton({ icon, label, iconColor, onPress }) {
   return (
     <TouchableOpacity
-      className="flex-1 bg-white rounded-2xl p-4 flex-row items-center shadow-sm"
+      className="flex-1 bg-white rounded-2xl p-4 flex-row items-center border border-gray-200"
       onPress={onPress}
+      style={{ elevation: 2 }}
     >
       <Ionicons name={icon} size={22} color={iconColor} />
       <Text className="ml-3 font-medium">{label}</Text>
@@ -89,16 +126,18 @@ function ActionButton({ icon, label, iconColor, onPress }) {
   );
 }
 
-function TabButton({ label, active }) {
+function TabButton({ label, active, onPress }) {
   return (
     <TouchableOpacity
+      onPress={onPress}
       className={`flex-1 items-center py-2 rounded-full ${
-        active ? "bg-white shadow" : ""
+        active ? "bg-blue-500" : ""
       }`}
+      style={active ? { elevation: 2 } : {}}
     >
       <Text
         className={`text-sm ${
-          active ? "font-semibold text-black" : "text-gray-500"
+          active ? "text-white font-semibold" : "text-gray-500"
         }`}
       >
         {label}
@@ -107,9 +146,14 @@ function TabButton({ label, active }) {
   );
 }
 
-function BillItem({ month, year, status, statusColor, amount, due }) {
+function BillItem({ month, year, status, amount, due }) {
+  const isPaid = status === "Paid";
+
   return (
-    <TouchableOpacity className="bg-white rounded-2xl p-4 flex-row justify-between items-center shadow-sm">
+    <TouchableOpacity
+      className="bg-white rounded-2xl p-4 flex-row justify-between items-center border border-gray-200"
+      style={{ elevation: 2 }}
+    >
       <View className="flex-row items-center">
         <View className="bg-gray-100 w-12 h-12 rounded-xl items-center justify-center mr-4">
           <Ionicons name="document-text-outline" size={22} />
@@ -117,18 +161,18 @@ function BillItem({ month, year, status, statusColor, amount, due }) {
 
         <View>
           <Text className="font-semibold">
-            {month} <Text className="text-gray-500 font-normal">{year}</Text>
+            {month} <Text className="text-gray-500">{year}</Text>
           </Text>
 
           <View className="flex-row items-center mt-1">
             <View
               className={`px-2 py-[2px] rounded-full mr-2 ${
-                statusColor === "green" ? "bg-green-100" : "bg-orange-100"
+                isPaid ? "bg-green-100" : "bg-orange-100"
               }`}
             >
               <Text
                 className={`text-xs font-medium ${
-                  statusColor === "green" ? "text-green-600" : "text-orange-600"
+                  isPaid ? "text-green-600" : "text-orange-600"
                 }`}
               >
                 {status}

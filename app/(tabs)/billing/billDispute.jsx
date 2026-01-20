@@ -15,51 +15,7 @@ export default function Billing() {
 
   return (
     <View className="flex-1 bg-white">
-      {/* Toggle Header */}
-      {/* 
-      <View className="flex-row bg-gray-100 rounded-full mx-4 mt-4 p-1 z-10">
-        <Pressable
-          onPress={() => setTab("raise")}
-          android_ripple={{ color: "#e5e7eb" }}
-          style={({ pressed }) => [
-            {
-              flex: 1,
-              paddingVertical: 10,
-              borderRadius: 999,
-              backgroundColor: tab === "raise" ? "#fff" : "transparent",
-              opacity: pressed ? 0.7 : 1,
-              elevation: tab === "raise" ? 2 : 0,
-            },
-          ]}
-        >
-          <View className="flex-row justify-center items-center">
-            <Ionicons name="alert-circle-outline" size={16} />
-            <Text className="ml-2 font-medium">Raise Dispute</Text>
-          </View>
-        </Pressable>
-
-        <Pressable
-          onPress={() => setTab("track")}
-          android_ripple={{ color: "#e5e7eb" }}
-          style={({ pressed }) => [
-            {
-              flex: 1,
-              paddingVertical: 10,
-              borderRadius: 999,
-              backgroundColor: tab === "track" ? "#fff" : "transparent",
-              opacity: pressed ? 0.7 : 1,
-              elevation: tab === "track" ? 2 : 0,
-            },
-          ]}
-        >
-          <View className="flex-row justify-center items-center">
-            <Ionicons name="time-outline" size={16} />
-            <Text className="ml-2 font-medium">Track Status</Text>
-          </View>
-        </Pressable>
-      </View> */}
       <View className="flex-row bg-gray-100 rounded-full mx-4 mt-4 p-1">
-        {/* Raise */}
         <Pressable onPress={() => setTab("raise")} className="flex-1">
           <View
             className={`flex-row items-center justify-center gap-2 rounded-full py-2 ${
@@ -84,7 +40,6 @@ export default function Billing() {
           </View>
         </Pressable>
 
-        {/* Track */}
         <Pressable onPress={() => setTab("track")} className="flex-1">
           <View
             className={`flex-row items-center justify-center gap-2 rounded-full py-2 ${
@@ -163,7 +118,6 @@ function RaiseDispute() {
   );
 }
 
-/* ------------------ TRACK STATUS ------------------ */
 function TrackStatus() {
   return (
     <ScrollView className="px-4 mt-6">
@@ -189,7 +143,7 @@ function TrackStatus() {
 function StatusCard({ month, issue, status, statusColor, date }) {
   return (
     <View className="bg-white rounded-2xl p-4 mb-4 shadow-sm border border-gray-100">
-      <View className="flex-row justify-between">
+      <View className="flex-row justify-between items-center">
         <View>
           <Text className="font-semibold">{month}</Text>
           <Text className="text-gray-500 text-sm mt-1">{issue}</Text>
@@ -201,7 +155,7 @@ function StatusCard({ month, issue, status, statusColor, date }) {
           }`}
         >
           <Text
-            className={`text-xs font-medium ${
+            className={`text-xs font-medium   ${
               statusColor === "green" ? "text-green-600" : "text-blue-600"
             }`}
           >

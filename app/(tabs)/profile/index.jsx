@@ -9,7 +9,6 @@ export default function Profile() {
   return (
     <SafeAreaView className="flex-1 bg-gray-100">
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Profile Card */}
         <View className="px-6 mt-6">
           <View className="bg-white rounded-2xl p-5 shadow-sm">
             <View className="flex-row items-center">
@@ -46,8 +45,6 @@ export default function Profile() {
             </View>
           </View>
         </View>
-
-        {/* Account */}
         <Section title="Account">
           <MenuItem
             icon="person-outline"
@@ -61,8 +58,6 @@ export default function Profile() {
             onPress={() => router.push("/profile/accountSetting")}
           />
         </Section>
-
-        {/* Move In / Out */}
         <Section title="Move In / Out">
           <MenuItem
             icon="swap-horizontal-outline"
@@ -81,7 +76,6 @@ export default function Profile() {
           />
         </Section>
 
-        {/* Support & Help */}
         <Section title="Support & Help">
           <MenuItem
             icon="help-circle-outline"
@@ -96,7 +90,6 @@ export default function Profile() {
           />
         </Section>
 
-        {/* Sign Out */}
         <View className="px-6 mt-6 mb-10">
           <TouchableOpacity
             className="bg-red-50 py-4 rounded-xl flex-row items-center justify-center"
@@ -110,8 +103,6 @@ export default function Profile() {
     </SafeAreaView>
   );
 }
-
-/* ---------------- Reusable Components ---------------- */
 
 function Section({ title, children }) {
   return (

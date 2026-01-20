@@ -1,7 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
-import { useState } from "react";
+import { useFocusEffect, useRouter } from "expo-router";
+import { useCallback, useState } from "react";
 import {
+  BackHandler,
   Linking,
   ScrollView,
   Text,
@@ -11,10 +12,36 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+const isLoggedIn = false;
 export default function HelpSupportScreen() {
   const router = useRouter();
   const [subjectFocus, setSubjectFocus] = useState(false);
   const [messageFocus, setMessageFocus] = useState(false);
+
+  const handleBack = () => {
+    if (!isLoggedIn) {
+      router.replace("/");
+    } else {
+      router.replace("/profile");
+    }
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      const onBackPress = () => {
+        router.replace("/");
+        return true;
+      };
+
+      const subscription = BackHandler.addEventListener(
+        "hardwareBackPress",
+        onBackPress
+      );
+
+      return () => subscription.remove(); // ✅ correct cleanup
+    }, [])
+  );
+
   const callSupport = async () => {
     const phone = "tel:+919876543210";
     const supported = await Linking.canOpenURL(phone);
@@ -36,7 +63,7 @@ export default function HelpSupportScreen() {
           name="chevron-back"
           size={24}
           color="#111827"
-          onPress={() => router.back()}
+          onPress={handleBack}
         />
         <Text className="text-lg font-semibold ml-3">Help & Support</Text>
       </View>

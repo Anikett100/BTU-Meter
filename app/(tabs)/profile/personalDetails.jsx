@@ -12,7 +12,6 @@ export default function PersonalDetails() {
         <Ionicons name="chevron-back" size={24} onPress={() => router.back()} />
         <Text className="text-lg font-semibold ml-3">Personal Details</Text>
       </View>
-
       <ScrollView className="px-6 pt-6">
         <Input label="Full Name" value="John Doe" />
         <Input label="Account ID" value="123456789" editable={false} />

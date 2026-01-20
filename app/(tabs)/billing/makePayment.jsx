@@ -21,31 +21,13 @@ export default function MakePayment() {
     >
       <ScrollView className="px-5 pt-4" showsVerticalScrollIndicator={false}>
         {/* Header */}
-        <View className="flex-row items-center mb-4">
+        {/* <View className="flex-row items-center mb-4">
           <Ionicons name="chevron-back" size={22} />
           <Text className="text-lg font-semibold ml-2">Make Payment</Text>
-        </View>
+        </View> */}
 
         {/* Toggle */}
-        {/* <View className="flex-row bg-gray-100 rounded-full p-1 mb-6">
-          <TouchableOpacity
-            onPress={() => setTab("monthly")}
-            className={`flex-1 py-2 rounded-full ${
-              tab === "monthly" ? "bg-white shadow" : ""
-            }`}
-          >
-            <Text className="text-center font-medium">Monthly Bill</Text>
-          </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={() => setTab("deposit")}
-            className={`flex-1 py-2 rounded-full ${
-              tab === "deposit" ? "bg-white shadow" : ""
-            }`}
-          >
-            <Text className="text-center text-gray-600">Security Deposit</Text>
-          </TouchableOpacity>
-        </View> */}
         <View className="flex-row bg-gray-100 rounded-full p-1 mb-6">
           {/* Monthly */}
           <Pressable onPress={() => setTab("monthly")} className="flex-1">
