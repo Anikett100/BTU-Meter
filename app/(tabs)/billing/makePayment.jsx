@@ -20,14 +20,7 @@ export default function MakePayment() {
       className="flex-1 bg-white"
     >
       <ScrollView className="px-5 pt-4" showsVerticalScrollIndicator={false}>
-        {/* Header */}
-        {/* <View className="flex-row items-center mb-4">
-          <Ionicons name="chevron-back" size={22} />
-          <Text className="text-lg font-semibold ml-2">Make Payment</Text>
-        </View> */}
-
         {/* Toggle */}
-
         <View className="flex-row bg-gray-100 rounded-full p-1 mb-6">
           {/* Monthly */}
           <Pressable onPress={() => setTab("monthly")} className="flex-1">
@@ -67,7 +60,7 @@ export default function MakePayment() {
         </View>
 
         {/* Bill Card */}
-        <View className="bg-teal-600 rounded-3xl p-6 mb-6">
+        <View className="bg-[#3f6289] rounded-3xl p-6 mb-6">
           <Text className="text-white/80 mb-2">
             {tab === "monthly" ? "Monthly Bill" : "Security Deposit"}
           </Text>
@@ -145,7 +138,7 @@ export default function MakePayment() {
 
       {/* Pay Button */}
       <View className="px-5 pb-6">
-        <TouchableOpacity className="bg-teal-600 py-4 rounded-full">
+        <TouchableOpacity className="bg-[#3f6289] py-4 rounded-full">
           <Text className="text-white text-center font-semibold text-lg">
             Pay $127.50
           </Text>

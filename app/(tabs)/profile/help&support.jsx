@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const isLoggedIn = false;
+const isLoggedIn = true;
 export default function HelpSupportScreen() {
   const router = useRouter();
   const [subjectFocus, setSubjectFocus] = useState(false);
@@ -100,18 +100,18 @@ export default function HelpSupportScreen() {
             onPress={emailSupport}
             className="flex-row items-center mb-3"
           >
-            <Ionicons name="mail-outline" size={18} color="#0d9488" />
+            <Ionicons name="mail-outline" size={18} color="#6f8fb0" />
             <Text className="ml-2 text-gray-700">support@yourapp.com</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={callSupport}
             className="flex-row items-center"
           >
-            <Ionicons name="call-outline" size={18} color="#0d9488" />
+            <Ionicons name="call-outline" size={18} color="#6f8fb0" />
             <Text className="ml-2 text-gray-700">+91 98765 43210</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity className="bg-teal-500 py-4 rounded-full mb-10">
+        <TouchableOpacity className="bg-[#3f6289] py-4 rounded-full mb-10">
           <Text className="text-white text-center font-semibold text-lg">
             Submit Request
           </Text>

@@ -34,10 +34,8 @@ export default function PaymentHistoryScreen() {
 
   return (
     <View className="flex-1 bg-gray-50 mt-16">
-      {/* Header */}
-
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View className="px-6 space-y-4 mb-20">
+        <View className="px-6 space-y-4 mb-20 gap-4">
           {payments.map((payment) => (
             <PaymentCard key={payment.id} payment={payment} />
           ))}
@@ -46,9 +44,6 @@ export default function PaymentHistoryScreen() {
     </View>
   );
 }
-
-/* ---------- Components ---------- */
-
 function PaymentCard({ payment }) {
   const isSuccess = payment.status === "Success";
 
@@ -75,14 +70,8 @@ function PaymentCard({ payment }) {
           </Text>
         </View>
       </View>
-
-      {/* Date */}
       <Text className="text-gray-500 text-sm mt-1">{payment.date}</Text>
-
-      {/* Divider */}
       <View className="h-[1px] bg-gray-200 my-3" />
-
-      {/* Payment Details */}
       <View className="flex-row justify-between">
         <View>
           <Text className="text-gray-500 text-xs">Payment Method</Text>

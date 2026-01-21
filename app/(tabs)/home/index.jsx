@@ -61,13 +61,10 @@ export default function Home() {
           </View>
         </View>
 
-        {/* Stats Cards */}
         <View className="flex-row px-6 mt-6  space-x-4 gap-4">
-          {/* Last Bill */}
           <View className="flex-1 bg-white rounded-2xl p-4 border border-blue-300 shadow-sm">
             <View className="w-9 h-9 bg-blue-100 rounded-full items-center justify-center mb-3">
               <DollarSign size={18} color="#2196F3" />
-              {/* <DollarSign size={18} color="black" /> */}
             </View>
             <Text className="text-gray-500 text-sm">Last Bill</Text>
             <Text className="text-xl font-bold text-gray-900 mt-1">

@@ -12,7 +12,7 @@ export default function Profile() {
         <View className="px-6 mt-6">
           <View className="bg-white rounded-2xl p-5 shadow-sm">
             <View className="flex-row items-center">
-              <View className="bg-blue-500 w-14 h-14 rounded-full items-center justify-center">
+              <View className="bg-[#3f6289] w-14 h-14 rounded-full items-center justify-center">
                 <Text className="text-white text-lg font-bold">JD</Text>
               </View>
 
@@ -62,16 +62,16 @@ export default function Profile() {
           <MenuItem
             icon="swap-horizontal-outline"
             label="Move-In Status"
-            bg="bg-green-100"
-            color="#16a34a"
+            bg="bg-[#3f6289]"
+            color="white"
             onPress={() => router.push("/profile/moveIn")}
           />
           <Divider />
           <MenuItem
             icon="swap-horizontal-outline"
             label="Move-Out Request"
-            bg="bg-orange-100"
-            color="#f97316"
+            bg="bg-[#3f6289]"
+            color="white"
             onPress={() => router.push("/profile/moveOut")}
           />
         </Section>
@@ -117,8 +117,8 @@ function MenuItem({
   icon,
   label,
   onPress,
-  bg = "bg-blue-100",
-  color = "#2196F3",
+  bg = "bg-[#3f6289]",
+  color = "white",
 }) {
   return (
     <TouchableOpacity

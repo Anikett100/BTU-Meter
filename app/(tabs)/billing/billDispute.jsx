@@ -109,7 +109,7 @@ function RaiseDispute() {
         </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity className="bg-teal-500 py-4 rounded-full mb-20">
+      <TouchableOpacity className="bg-[#3f6289] py-4 rounded-full mb-20">
         <Text className="text-white text-center font-semibold text-lg">
           Submit Dispute
         </Text>

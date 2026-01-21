@@ -45,7 +45,7 @@ export default function BillingScreen() {
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Outstanding Card */}
         <View className="px-6 mt-4">
-          <View className="bg-blue-500 rounded-3xl p-6">
+          <View className="bg-[#3f6289] rounded-3xl p-6">
             <Text className="text-white text-sm">Outstanding Balance</Text>
             <Text className="text-white text-3xl font-bold mt-2">$127.50</Text>
 
@@ -131,7 +131,7 @@ function TabButton({ label, active, onPress }) {
     <TouchableOpacity
       onPress={onPress}
       className={`flex-1 items-center py-2 rounded-full ${
-        active ? "bg-blue-500" : ""
+        active ? "bg-[#3f6289]" : ""
       }`}
       style={active ? { elevation: 2 } : {}}
     >

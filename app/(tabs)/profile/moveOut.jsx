@@ -113,7 +113,7 @@ export default function MoveOutRequest() {
 
         {/* Submit Button */}
         <View className="px-6 mt-8 mb-10">
-          <TouchableOpacity className="bg-teal-500 py-4 rounded-xl flex-row items-center justify-center">
+          <TouchableOpacity className="bg-[#3f6289] py-4 rounded-xl flex-row items-center justify-center">
             <Text className="text-white font-semibold text-base mr-2">
               Submit Move-Out Request
             </Text>

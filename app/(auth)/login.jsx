@@ -38,8 +38,6 @@ export default function Login() {
     }, 1500);
   };
 
-  
-
   return (
     <SafeAreaView className="flex-1 bg-white">
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
@@ -48,7 +46,7 @@ export default function Login() {
         <View className="flex-1 justify-center px-6">
           {/* Logo */}
           <View className="items-center mb-6">
-            <View className="w-20 h-20 rounded-2xl bg-blue-500 items-center justify-center mb-4">
+            <View className="w-20 h-20 rounded-2xl bg-[#3f6289] items-center justify-center mb-4">
               <Text className="text-white text-3xl font-bold">⚡</Text>
             </View>
 
@@ -148,7 +146,7 @@ export default function Login() {
 
           {/* Login Button */}
           <Pressable
-            className="bg-blue-500 py-4 rounded-xl"
+            className="bg-[#3f6289] py-4 rounded-xl"
             onPress={handleSubmit(onSubmit)}
             disabled={loading}
           >

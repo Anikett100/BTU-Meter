@@ -51,6 +51,7 @@ export default function Usage() {
                   Monthly Usage
                 </Text>
               </View>
+
               <View className="flex-row bg-gray-100 rounded-lg p-1">
                 <TouchableOpacity
                   onPress={() => setChartType("area")}
