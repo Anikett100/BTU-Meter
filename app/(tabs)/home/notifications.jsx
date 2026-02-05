@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Notifications() {
@@ -25,7 +25,8 @@ export default function Notifications() {
           bg="bg-orange-100"
           color="#f59e0b"
           title="Payment Reminder"
-          message="Your bill of $127.50 is due in 3 days"
+          amount="127.50"
+          messageSuffix="is due in 3 days"
           time="2h ago"
         />
 
@@ -52,7 +53,8 @@ export default function Notifications() {
           bg="bg-green-100"
           color="#22c55e"
           title="Payment Received"
-          message="We received your payment of $142.30"
+          amount="142.30"
+          messageSuffix="has been received"
           time="5 days ago"
         />
       </ScrollView>
@@ -60,7 +62,16 @@ export default function Notifications() {
   );
 }
 
-function NotificationItem({ icon, bg, color, title, message, time }) {
+function NotificationItem({
+  icon,
+  bg,
+  color,
+  title,
+  message,
+  amount,
+  messageSuffix,
+  time,
+}) {
   return (
     <View className="bg-white rounded-2xl p-4 mb-4 shadow-sm">
       <View className="flex-row">
@@ -75,7 +86,35 @@ function NotificationItem({ icon, bg, color, title, message, time }) {
             <Text className="font-semibold text-gray-900">{title}</Text>
             <Text className="text-xs text-gray-400">{time}</Text>
           </View>
-          <Text className="text-gray-600 text-sm mt-1">{message}</Text>
+
+          {/* Message */}
+          {amount ? (
+            <View className="flex-row items-center mt-1 flex-wrap">
+              <Text className="text-gray-600 text-sm mr-1">Your bill of</Text>
+
+              <Image
+                source={{
+                  uri: "https://aiadvocate.s3.ap-south-1.amazonaws.com/DirhamIcon.png",
+                }}
+                style={{
+                  width: 12,
+                  height: 18,
+                  marginHorizontal: 0,
+                }}
+                resizeMode="contain"
+              />
+
+              <Text className="text-gray-600 text-sm font-semibold">
+                {amount}
+              </Text>
+
+              <Text className="text-gray-600 text-sm ml-1">
+                {messageSuffix}
+              </Text>
+            </View>
+          ) : (
+            <Text className="text-gray-600 text-sm mt-1">{message}</Text>
+          )}
         </View>
       </View>
     </View>

@@ -7,7 +7,7 @@ export default function BillingLayout() {
       <Stack.Screen name="makePayment" options={{ title: "Payment" }} />
       <Stack.Screen
         name="paymentHistory"
-        options={{ title: "paymentHistory" }}
+        options={{ title: "Payment History" }}
       />
     </Stack>
   );

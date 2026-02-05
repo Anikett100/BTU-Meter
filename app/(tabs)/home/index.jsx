@@ -3,13 +3,13 @@ import {
   AlertCircle,
   BarChart3,
   Bell,
-  DollarSign,
   Droplet,
   FileText,
   HelpCircle,
   TrendingUp,
 } from "lucide-react-native";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Home() {
@@ -46,7 +46,6 @@ export default function Home() {
           </View>
         </View>
 
-        {/* Current Month Card */}
         <View className="px-6 mt-6">
           <View className="bg-[#3f6289] rounded-2xl p-6">
             <View className="w-10 h-10 bg-white/20 rounded-full items-center justify-center mb-4">
@@ -64,31 +63,62 @@ export default function Home() {
         <View className="flex-row px-6 mt-6  space-x-4 gap-4">
           <View className="flex-1 bg-white rounded-2xl p-4 border border-blue-300 shadow-sm">
             <View className="w-9 h-9 bg-blue-100 rounded-full items-center justify-center mb-3">
-              <DollarSign size={18} color="#2196F3" />
+              {/* <DollarSign size={18} color="#2196F3" /> */}
+              <Image
+                source={{
+                  uri: "https://aiadvocate.s3.ap-south-1.amazonaws.com/DirhamIcon.png",
+                }}
+                style={{ width: 18, height: 18, tintColor: "#2196F3" }}
+                resizeMode="contain"
+              />
             </View>
             <Text className="text-gray-500 text-sm">Last Bill</Text>
-            <Text className="text-xl font-bold text-gray-900 mt-1">
-              $127.50
-            </Text>
+
+            <View className="flex-row items-center mt-1">
+              <Image
+                source={{
+                  uri: "https://aiadvocate.s3.ap-south-1.amazonaws.com/DirhamIcon.png",
+                }}
+                style={{
+                  width: 20, // tweak this
+                  height: 22, // tweak this to match text-xl
+                  marginRight: 0, // tiny spacing
+                  transform: [{ scale: 1.15 }],
+                }}
+                resizeMode="contain"
+              />
+              <Text className="text-xl font-bold text-gray-900">127.50</Text>
+            </View>
+
             <Text className="text-gray-400 text-xs mt-1">
               Due: Jan 15, 2024
             </Text>
           </View>
 
-          {/* Outstanding */}
           <View className="flex-1 bg-white rounded-2xl p-4 border border-blue-300 shadow-sm">
             <View className="w-9 h-9 bg-blue-100 rounded-full items-center justify-center mb-3">
               <AlertCircle size={18} color="#2196F3" />
             </View>
 
             <Text className="text-gray-500 text-sm">Outstanding</Text>
-            <Text className="text-xl font-bold text-gray-900 mt-1">
-              $127.50
-            </Text>
+            <View className="flex-row items-center mt-1">
+              <Image
+                source={{
+                  uri: "https://aiadvocate.s3.ap-south-1.amazonaws.com/DirhamIcon.png",
+                }}
+                style={{
+                  width: 20, // tweak this
+                  height: 22, // tweak this to match text-xl
+                  marginRight: 0, // tiny spacing
+                  transform: [{ scale: 1.15 }],
+                }}
+                resizeMode="contain"
+              />
+              <Text className="text-xl font-bold text-gray-900">127.50</Text>
+            </View>
           </View>
         </View>
 
-        {/* Avg Daily Usage  */}
         <View className="px-6 mt-6">
           <View className="border border-blue-300 rounded-2xl p-5">
             <View className="bg-blue-100 w-10 h-10 rounded-full items-center justify-center mb-3">
@@ -110,21 +140,33 @@ export default function Home() {
 
           <View className="flex-row flex-wrap justify-between">
             <ActionCard
-              icon={<DollarSign size={20} color="#2196F3" />}
+              // icon={<DollarSign size={20} color="#2196F3" />}
+              icon={
+                <Image
+                  source={{
+                    uri: "https://aiadvocate.s3.ap-south-1.amazonaws.com/DirhamIcon.png",
+                  }}
+                  style={{ width: 20, height: 20, tintColor: "#2196F3" }}
+                  resizeMode="contain"
+                />
+              }
               label="Pay Bill"
               onPress={() => router.push("/billing/makePayment")}
             />
             <ActionCard
               icon={<BarChart3 size={20} color="#2196F3" />}
               label="View Usage"
+              onPress={() => router.push("/usage")}
             />
             <ActionCard
               icon={<FileText size={20} color="#2196F3" />}
               label="My Bills"
+              onPress={() => router.push("/billing")}
             />
             <ActionCard
               icon={<HelpCircle size={20} color="#2196F3" />}
               label="Get Help"
+              onPress={() => router.push("/profile/help&support")}
             />
           </View>
         </View>

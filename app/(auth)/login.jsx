@@ -1,10 +1,11 @@
 import { useRouter } from "expo-router";
-import { Eye, EyeOff, Lock, Mail } from "lucide-react-native";
+import { Eye, EyeOff } from "lucide-react-native";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
+  Dimensions,
+  Image,
   Pressable,
-  ScrollView,
   StatusBar,
   Text,
   TextInput,
@@ -13,157 +14,117 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+const { height: SCREEN_HEIGHT } = Dimensions.get("window");
+
 export default function Login() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const { control, handleSubmit } = useForm({
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = (data) => {
-    setLoading(true);
-
-    setTimeout(() => {
-      setLoading(false);
-      router.replace("/home");
-    }, 1500);
+  const onSubmit = () => {
+    router.replace("/home");
   };
 
   return (
     <SafeAreaView className="flex-1 bg-white">
-      <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
+      <StatusBar barStyle="dark-content" />
 
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View className="flex-1 justify-center px-6">
-          {/* Logo */}
-          <View className="items-center mb-6">
-            <View className="w-20 h-20 rounded-2xl bg-[#3f6289] items-center justify-center mb-4">
-              <Text className="text-white text-3xl font-bold">⚡</Text>
-            </View>
+      <View className="flex-1">
+        {/* REMAINING UPPER SPACE (LOGO CENTERED) */}
+        <View className="flex-1 justify-center items-center px-6">
+          <Image
+            source={require("../../assets/images/Logo.jpeg")}
+            className="w-64 h-64"
+            resizeMode="contain"
+          />
+        </View>
 
-            <Text className="text-2xl font-bold text-gray-900">BTU Meter</Text>
-            <Text className="text-gray-500 mt-1">
-              Your meter bill management portal
-            </Text>
-          </View>
-          <View className="mb-4">
-            <Text className="text-gray-700 mb-2 font-medium">
-              Email Address
-            </Text>
+        {/* BLUE SECTION */}
+        <View
+          style={{
+            height: SCREEN_HEIGHT * 0.7,
+            paddingBottom: SCREEN_HEIGHT * 0.32,
+          }}
+          className="bg-[#0f4c5c] rounded-t-[32px] px-6 pt-10 pb-20"
+        >
+          <Text className="text-white text-xl font-semibold text-center mb-6">
+            Login as Admin!
+          </Text>
 
-            <View className="flex-row items-center border border-gray-300 rounded-xl px-4 py-3">
-              <Mail size={20} color="#9ca3af" />
-
-              <Controller
-                control={control}
-                name="email"
-                rules={{
-                  required: "Email is required",
-                  pattern: {
-                    value: /^\S+@\S+$/i,
-                    message: "Enter a valid email",
-                  },
-                }}
-                render={({ field: { value, onChange } }) => (
-                  <TextInput
-                    value={value}
-                    onChangeText={onChange}
-                    placeholder="Enter your email"
-                    placeholderTextColor="#9ca3af"
-                    autoCapitalize="none"
-                    className="ml-3 flex-1 text-gray-900"
-                  />
-                )}
+          {/* EMAIL */}
+          <Controller
+            control={control}
+            name="email"
+            render={({ field: { value, onChange } }) => (
+              <TextInput
+                value={value}
+                onChangeText={onChange}
+                placeholder="Enter Your Email Address"
+                placeholderTextColor="#94a3b8"
+                className="bg-white rounded-full px-5 py-7 mb-6 text-gray-900"
               />
-            </View>
-
-            {errors.email && (
-              <Text className="text-red-500 mt-1 text-sm">
-                {errors.email.message}
-              </Text>
             )}
-          </View>
-          <View className="mb-2">
-            <Text className="text-gray-700 mb-2 font-medium">Password</Text>
+          />
 
-            <View className="flex-row items-center border border-gray-300 rounded-xl px-4 py-3">
-              <Lock size={20} color="#9ca3af" />
+          {/* PASSWORD */}
+          <View className="bg-white rounded-full px-5 py-4 mb-5 flex-row items-center">
+            <Controller
+              control={control}
+              name="password"
+              render={({ field: { value, onChange } }) => (
+                <TextInput
+                  value={value}
+                  onChangeText={onChange}
+                  placeholder="Enter Your Password"
+                  placeholderTextColor="#94a3b8"
+                  secureTextEntry={!showPassword}
+                  className="flex-1 text-gray-900"
+                />
+              )}
+            />
 
-              <Controller
-                control={control}
-                name="password"
-                rules={{
-                  required: "Password is required",
-                  minLength: {
-                    value: 4,
-                    message: "Minimum 6 characters",
-                  },
-                }}
-                render={({ field: { value, onChange } }) => (
-                  <TextInput
-                    value={value}
-                    onChangeText={onChange}
-                    placeholder="Enter your password"
-                    placeholderTextColor="#9ca3af"
-                    secureTextEntry={!showPassword}
-                    className="ml-3 flex-1 text-gray-900"
-                  />
-                )}
-              />
-
-              <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-                {showPassword ? (
-                  <Eye size={20} color="#0f172a" />
-                ) : (
-                  <EyeOff size={20} color="#0f172a" />
-                )}
-              </TouchableOpacity>
-            </View>
-
-            {errors.password && (
-              <Text className="text-red-500 mt-1 text-sm">
-                {errors.password.message}
-              </Text>
-            )}
+            <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+              {showPassword ? (
+                <Eye size={18} color="#0f172a" />
+              ) : (
+                <EyeOff size={18} color="#0f172a" />
+              )}
+            </TouchableOpacity>
           </View>
 
-          {/* Forgot Password */}
+          {/* FORGOT PASSWORD */}
           <TouchableOpacity
-            className="self-end mb-6"
+            className="self-end mb-6 pr-1"
             onPress={() => router.push("/forgot-password")}
           >
-            <Text className="font-medium">Forgot Password?</Text>
+            <Text className="text-white text-sm">Forgot Password?</Text>
           </TouchableOpacity>
 
-          {/* Login Button */}
+          {/* SIGN IN */}
           <Pressable
-            className="bg-[#3f6289] py-4 rounded-xl"
             onPress={handleSubmit(onSubmit)}
-            disabled={loading}
+            className="bg-[#b89a5b] rounded-full py-5 px-6 flex-row justify-center items-center"
           >
-            <Text className="text-white text-lg font-semibold text-center">
-              {loading ? "Logging in..." : "Login"}
-            </Text>
+            <Text className="text-white font-semibold text-lg">Sign In</Text>
           </Pressable>
 
-          <View className="flex-row justify-center mt-6">
-            <Text className="text-gray-500">Need help? </Text>
-
-            <Pressable onPress={() => router.replace("/profile/help&support")}>
-              <Text className="font-medium text-teal-600">Contact Support</Text>
-            </Pressable>
-          </View>
+          <Image
+            source={require("../../assets/images/burj.png")}
+            style={{
+              width: "100%",
+              height: SCREEN_HEIGHT * 0.4,
+              bottom: 8,
+            }}
+            resizeMode="cover"
+          />
         </View>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }

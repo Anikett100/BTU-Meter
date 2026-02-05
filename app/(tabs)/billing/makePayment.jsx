@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import {
+  Image,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -14,6 +15,8 @@ import {
 export default function MakePayment() {
   const [tab, setTab] = useState("monthly");
 
+  const amount = "127.50";
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : undefined}
@@ -22,7 +25,6 @@ export default function MakePayment() {
       <ScrollView className="px-5 pt-4" showsVerticalScrollIndicator={false}>
         {/* Toggle */}
         <View className="flex-row bg-gray-100 rounded-full p-1 mb-6">
-          {/* Monthly */}
           <Pressable onPress={() => setTab("monthly")} className="flex-1">
             <View
               className={`rounded-full py-2 ${
@@ -40,7 +42,6 @@ export default function MakePayment() {
             </View>
           </Pressable>
 
-          {/* Deposit */}
           <Pressable onPress={() => setTab("deposit")} className="flex-1">
             <View
               className={`rounded-full py-2 ${
@@ -64,7 +65,26 @@ export default function MakePayment() {
           <Text className="text-white/80 mb-2">
             {tab === "monthly" ? "Monthly Bill" : "Security Deposit"}
           </Text>
-          <Text className="text-white text-4xl font-bold">$127.50</Text>
+
+          {/* Amount with Dirham Image */}
+          <View className="flex-row items-center">
+            <Image
+              source={{
+                uri: "https://aiadvocate.s3.ap-south-1.amazonaws.com/DirhamIcon.png",
+              }}
+              style={{
+                width: 26,
+                height: 30,
+                marginRight: 6,
+                transform: [{ scale: 1.4 }], // bold effect
+                tintColor: "#ffffff",
+              }}
+              resizeMode="contain"
+            />
+
+            <Text className="text-white text-4xl font-bold">{amount}</Text>
+          </View>
+
           <Text className="text-white/80 mt-2">Due: Jan 15, 2024</Text>
         </View>
 
@@ -89,7 +109,6 @@ export default function MakePayment() {
             <Text className="font-semibold text-lg ml-2">Card Details</Text>
           </View>
 
-          {/* Card Number */}
           <Text className="text-gray-600 mb-2">Card Number</Text>
           <TextInput
             placeholder="1234 5678 9012 3456"
@@ -97,7 +116,6 @@ export default function MakePayment() {
             className="border border-gray-200 rounded-xl px-4 py-3 mb-4"
           />
 
-          {/* Expiry + CVV */}
           <View className="flex-row gap-4 mb-4">
             <View className="flex-1">
               <Text className="text-gray-600 mb-2">Expiry Date</Text>
@@ -119,7 +137,6 @@ export default function MakePayment() {
             </View>
           </View>
 
-          {/* Name */}
           <Text className="text-gray-600 mb-2">Name on Card</Text>
           <TextInput
             placeholder="John Doe"
@@ -140,7 +157,7 @@ export default function MakePayment() {
       <View className="px-5 pb-6">
         <TouchableOpacity className="bg-[#3f6289] py-4 rounded-full">
           <Text className="text-white text-center font-semibold text-lg">
-            Pay $127.50
+            Pay {amount}
           </Text>
         </TouchableOpacity>
       </View>

@@ -34,7 +34,7 @@ export default function ResetPassword() {
             onPress: () => router.replace("/"),
           },
         ],
-        { cancelable: false }
+        { cancelable: false },
       );
     }
   }, [resetSuccess]);
@@ -146,7 +146,7 @@ export default function ResetPassword() {
           ) : null}
 
           <TouchableOpacity
-            className={`bg-blue-500 py-3 rounded-lg ${
+            className={`bg-[#0f4c5c] py-3 rounded-lg ${
               loading ? "opacity-50" : ""
             }`}
             onPress={handleResetPassword}
