@@ -1,9 +1,11 @@
-import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { Eye, EyeOff } from "lucide-react-native";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import {
-  Alert,
-  ScrollView,
+  Dimensions,
+  Image,
+  Pressable,
   StatusBar,
   Text,
   TextInput,
@@ -12,152 +14,163 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+const { height: SCREEN_HEIGHT } = Dimensions.get("window");
+
 export default function ResetPassword() {
   const router = useRouter();
-
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [resetSuccess, setResetSuccess] = useState(false);
 
-  useEffect(() => {
-    if (resetSuccess) {
-      Alert.alert(
-        "Success 🎉",
-        "Your password has been reset successfully.",
-        [
-          {
-            text: "Go to Login",
-            onPress: () => router.replace("/"),
-          },
-        ],
-        { cancelable: false },
-      );
-    }
-  }, [resetSuccess]);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm({
+    defaultValues: {
+      newPassword: "",
+      confirmPassword: "",
+    },
+  });
 
-  const handleResetPassword = async () => {
-    if (!newPassword || !confirmPassword) {
-      setError("All fields are required");
-      return;
-    }
+  const newPassword = watch("newPassword");
 
-    if (newPassword.length < 6) {
-      setError("Password must be at least 6 characters");
-      return;
-    }
-
-    if (newPassword !== confirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }
-
-    setError("");
-    setLoading(true);
-
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      setResetSuccess(true);
-    } catch (e) {
-      setError("Something went wrong. Try again.");
-    } finally {
-      setLoading(false);
-    }
+  const onSubmit = (data) => {
+    // Assuming validation passes, proceed to login or home
+    router.replace("/");
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <View className="flex-1 bg-white relative">
       <StatusBar barStyle="dark-content" />
 
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View className="flex-1 justify-center px-6">
-          <Text className="text-black text-2xl font-bold text-center mb-2">
-            Reset Password
-          </Text>
-
-          <Text className="text-gray-500 text-center mb-6">
-            Enter your new password
-          </Text>
-
-          {/* New Password */}
-          <View className="mb-4 relative">
-            <Text className="text-gray-600 mb-2 font-semibold">
-              New Password
-            </Text>
-
-            <TextInput
-              value={newPassword}
-              onChangeText={setNewPassword}
-              placeholder="Enter new password"
-              placeholderTextColor="#9ca3af"
-              secureTextEntry={!showPassword}
-              className="border border-gray-400 rounded-lg px-4 py-3 text-black"
+      {/* TOP SAFE AREA ONLY */}
+      <SafeAreaView edges={["top"]} className="flex-1">
+        <View className="flex-1">
+          {/* LOGO SECTION */}
+          <View className="flex-1 justify-center items-center px-6">
+            <Image
+              source={require("../../assets/images/Logo.jpeg")}
+              className="w-64 h-64 mb-6"
+              resizeMode="contain"
             />
-
-            <TouchableOpacity
-              className="absolute right-3 top-10"
-              onPress={() => setShowPassword(!showPassword)}
-            >
-              <Ionicons
-                name={showPassword ? "eye" : "eye-off"}
-                size={20}
-                color="#9ca3af"
-              />
-            </TouchableOpacity>
           </View>
 
-          {/* Confirm Password */}
-          <View className="mb-6 relative">
-            <Text className="text-gray-600 mb-2 font-semibold">
-              Confirm Password
-            </Text>
-
-            <TextInput
-              value={confirmPassword}
-              onChangeText={setConfirmPassword}
-              placeholder="Confirm password"
-              placeholderTextColor="#9ca3af"
-              secureTextEntry={!showConfirmPassword}
-              className={`border rounded-lg px-4 py-3 text-black ${
-                error ? "border-red-500" : "border-gray-400"
-              }`}
-            />
-
-            <TouchableOpacity
-              className="absolute right-3 top-10"
-              onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-            >
-              <Ionicons
-                name={showConfirmPassword ? "eye" : "eye-off"}
-                size={20}
-                color="#9ca3af"
-              />
-            </TouchableOpacity>
-          </View>
-
-          {error ? (
-            <Text className="text-red-500 text-center mb-4 font-medium">
-              {error}
-            </Text>
-          ) : null}
-
-          <TouchableOpacity
-            className={`bg-[#0f4c5c] py-3 rounded-lg ${
-              loading ? "opacity-50" : ""
-            }`}
-            onPress={handleResetPassword}
-            disabled={loading}
+          {/* BLUE LOGIN CARD */}
+          <View
+            className="bg-[#0f4c5c] rounded-t-[32px] px-6 pt-10"
+            style={{
+              minHeight: SCREEN_HEIGHT * 0.6,
+              paddingBottom: SCREEN_HEIGHT * 0.28, // space for skyline
+            }}
           >
-            <Text className="text-white text-lg font-semibold text-center">
-              {loading ? "Resetting..." : "Reset Password"}
+            <Text className="text-white text-xl font-semibold text-center mb-6">
+              Reset Password
             </Text>
-          </TouchableOpacity>
+
+            <Controller
+              control={control}
+              name="newPassword"
+              rules={{
+                required: "New password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters",
+                },
+              }}
+              render={({ field: { value, onChange } }) => (
+                <>
+                  <View className="bg-white rounded-full px-5 py-4 mb-4 flex-row items-center">
+                    <TextInput
+                      value={value}
+                      onChangeText={onChange}
+                      placeholder="Enter New Password"
+                      placeholderTextColor="#94a3b8"
+                      secureTextEntry={!showNewPassword}
+                      className="flex-1 text-gray-900"
+                    />
+                    <TouchableOpacity
+                      onPress={() => setShowNewPassword(!showNewPassword)}
+                    >
+                      {showNewPassword ? (
+                        <Eye size={18} color="#0f172a" />
+                      ) : (
+                        <EyeOff size={18} color="#0f172a" />
+                      )}
+                    </TouchableOpacity>
+                  </View>
+                  {errors.newPassword && (
+                    <Text className="text-red-400 text-sm mb-3 ml-2">
+                      {errors.newPassword.message}
+                    </Text>
+                  )}
+                </>
+              )}
+            />
+
+            <Controller
+              control={control}
+              name="confirmPassword"
+              rules={{
+                required: "Confirm password is required",
+                validate: (value) =>
+                  value === newPassword || "Passwords do not match",
+              }}
+              render={({ field: { value, onChange } }) => (
+                <>
+                  <View className="bg-white rounded-full px-5 py-4 mb-2 flex-row items-center">
+                    <TextInput
+                      value={value}
+                      onChangeText={onChange}
+                      placeholder="Confirm New Password"
+                      placeholderTextColor="#94a3b8"
+                      secureTextEntry={!showConfirmPassword}
+                      className="flex-1 text-gray-900"
+                    />
+                    <TouchableOpacity
+                      onPress={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
+                    >
+                      {showConfirmPassword ? (
+                        <Eye size={18} color="#0f172a" />
+                      ) : (
+                        <EyeOff size={18} color="#0f172a" />
+                      )}
+                    </TouchableOpacity>
+                  </View>
+                  {errors.confirmPassword && (
+                    <Text className="text-red-400 text-sm mb-3 ml-2">
+                      {errors.confirmPassword.message}
+                    </Text>
+                  )}
+                </>
+              )}
+            />
+
+            <Pressable
+              onPress={handleSubmit(onSubmit)}
+              className="bg-[#b89a5b] rounded-full py-5 px-6 mt-4 mb-2 flex-row justify-center items-center"
+            >
+              <Text className="text-white font-semibold text-lg">
+                Reset Password
+              </Text>
+            </Pressable>
+          </View>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+      </SafeAreaView>
+
+      {/* SKYLINE - FULL BLEED TO BOTTOM */}
+      <Image
+        source={require("../../assets/images/burj.png")}
+        style={{
+          position: "absolute",
+          bottom: 0,
+          width: "100%",
+          height: SCREEN_HEIGHT * 0.28,
+        }}
+        resizeMode="cover"
+      />
+    </View>
   );
 }
